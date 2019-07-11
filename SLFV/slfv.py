@@ -42,9 +42,10 @@ vneutral = np.vectorize(neutral, signature = '(n)->()')
 pois_neu = ps.inh_ppp(size = [SIZE, SIZE, TIME_HORZ], inh_function = vneutral)
 neutral_events = pois_neu.generate()
 
-# 4) We define the positive selective events:
+# 4) We define the positive/negative selective events:
 pois_sel_pl  = ps.inh_ppp(size = [SIZE, SIZE, TIME_HORZ], inh_function = vselection_pl)
 selection_pl_events = pois_sel_pl.generate()
 pois_sel_mn  = ps.inh_ppp(size = [SIZE, SIZE, TIME_HORZ], inh_function = vselection_mn)
 selection_mn_events = pois_sel_mn.generate()
-embed()
+
+
