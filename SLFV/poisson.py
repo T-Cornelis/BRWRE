@@ -32,7 +32,7 @@ class inh_ppp:
 			self.max_f = 1
 
 	def generate(self):
-		"Generate a homogeneous PPP"
+		"Generate a (in-)homogeneous PPP"
 
 		# 1) Total number of particles
 		self.total  = np.random.poisson(lam = np.prod(self.size))
