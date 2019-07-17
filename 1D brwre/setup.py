@@ -10,7 +10,7 @@ from Cython.Build import cythonize
 # which you want to compile.
 
 setup(
-    ext_modules = cythonize('brwre_2D.pyx', annotate = True)
+    ext_modules = cythonize('brwre_1D.pyx', annotate = True)
 )
 
 # annotate = True generates HTML file.

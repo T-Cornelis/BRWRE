@@ -120,7 +120,7 @@ INI_brwre(particle, &SPATIAL_NOISE[0][0], &TIME_NOISE[0], ini_ptr, aim)
 # Parameters for the sizes of the picture
 
 B_NUM_EXTRA = 90
-B_NUM_averaging =15
+B_NUM_averaging =20
 
 # Compute the spatial subdivision.
 # And start the brwre_histogram.
@@ -246,7 +246,7 @@ ax2.set_xlim(0, 1)
 ax2.set_ylim(0, 1)
 time_text = ax1.text(0.05, 0.95,'',horizontalalignment='left',verticalalignment='top', transform=ax1.transAxes, color = 'white')
 # Picture for the particle system
-im1       = ax1.imshow(brwre_histo*(B_NUM_EXTRA/DIM_BOX)**2, interpolation='sinc', origin='low', vmin = 0, vmax = 0.045*intensity*B_NUM_EXTRA,  \
+im1       = ax1.imshow(brwre_histo*(B_NUM_EXTRA/DIM_BOX)**2, interpolation='none', origin='low', vmin = 0, vmax = 0.047*intensity*B_NUM_EXTRA,  \
 	extent=[space_histo_x[0]/DIM_BOX, space_histo_x[-1]/DIM_BOX, space_histo_y[0]/DIM_BOX, space_histo_y[-1]/DIM_BOX], cmap = plt.get_cmap('jet'))
 # Picture for the averaged noise!
 im2       = ax2.imshow(noise_avrg, interpolation='none', origin='low', vmin = -2*intensity*B_NUM_averaging, vmax = 2*intensity*B_NUM_averaging,  \
