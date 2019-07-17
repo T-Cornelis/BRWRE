@@ -38,4 +38,6 @@ particle system:
 
 - https://arxiv.org/abs/1906.11054
 
+From 1 to ~60000 particles:
+
 ![alt text](brwre_1.gif)
