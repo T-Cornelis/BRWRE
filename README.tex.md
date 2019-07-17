@@ -18,10 +18,10 @@ to be able to simulate large quantities of particles. The C code is imported in
 Python with Cython, where pictures and short movies can be produced. Both
 dimensions work essentially in the same way.
 
-__Description od the programs (2D case only)__
+__Description of the programs (2D case only)__
 
 - The particle system at fixed time is a C list (these are defined in
-  my_2D_list.c / my_2D_list.h
+  my_2D_list.c / my_2D_list.h)
 
 - The particle system is run in brwre_black_2D.c, which takes as an input the
   random environment and a set of externally generated pseudo-random variables.
@@ -29,7 +29,7 @@ __Description od the programs (2D case only)__
 
 - The C code is embedded in Python in brwre_2D.pyx (which can be run with
   setup.py - see instructions in file). Here the output is a movie. The
-  particle system is run at a diffusive scaling.
+  particle system is run at under diffusive scaling.
 
 Motivation for this simulation was the study of the scaling limit of the
 particle system:
@@ -38,4 +38,4 @@ particle system:
 
 - https://arxiv.org/abs/1906.11054
 
-
+![] (brwre_1.gif)
