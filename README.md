@@ -42,6 +42,6 @@ Small number of particles:
 
 ![alt text](brwre_1.gif)
 
-Large number of particles
+Large number of particles:
 
 ![alt text](brwre_2.gif)
