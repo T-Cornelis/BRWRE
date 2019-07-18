@@ -8,8 +8,8 @@
 /* The next three have to be changed also int he Cython code!*/
 
 #define DIM_RANDOM 100000
-#define INI_PART 40000
-#define DIM_BOX 200
+#define INI_PART 15000
+#define DIM_BOX 150
 
 /*Error we allow for the noise (below we don't consider it)*/
 #define MIN_ERROR 0.000000001

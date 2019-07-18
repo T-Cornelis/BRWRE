@@ -55,14 +55,14 @@ cdef extern from "brwre_black_2D.c":
 # Number of particles at the beginning.
 cdef int INI_PART
 
-INI_PART = 40000
+INI_PART = 15000
 
 # Size of the box:
 cdef int CENTER
 cdef int DIM_BOX
 
-DIM_BOX = 200
-CENTER  = 100
+DIM_BOX = 150
+CENTER  = 75
 
 # Number of random times we generate at once:
 cdef int DIM_RANDOM
@@ -70,9 +70,9 @@ cdef int DIM_RANDOM
 DIM_RANDOM = 100000
 
 # SPATIAL_NOISE is the (random) potential the particles move in.
-cdef double SPATIAL_NOISE[200][200]
+cdef double SPATIAL_NOISE[150][150]
 # We introduce an additional intensity constant, otherwise the effects are too small.
-intensity = 10
+intensity = 5
 # This is the true macroscopic noise.
 
 noise_macro = np.random.normal(size = (DIM_BOX, DIM_BOX))*DIM_BOX*intensity
@@ -96,8 +96,8 @@ cdef List* ini_ptr
 
 ini_ptr = &initial_list
 
-cdef double initial_dbl[40000]
-cdef int initial_int[40000][3]
+cdef double initial_dbl[15000]
+cdef int initial_int[15000][3]
 
 initial_times  = np.random.exponential(size = (INI_PART))
 initial_choice = np.random.binomial(2, 0.5, size= (INI_PART))
@@ -111,7 +111,7 @@ for i in range(INI_PART):
 INI_list(ini_ptr, &initial_dbl[0], &initial_int[0][0], INI_PART)
 
 # Describes how much time we let pass for every frame.
-time_step = 0.0001
+time_step = 0.0003
 aim = time_step*(DIM_BOX**2)
 
 # So that now we can initialize the BRWRE sample:
@@ -119,8 +119,8 @@ INI_brwre(particle, &SPATIAL_NOISE[0][0], &TIME_NOISE[0], ini_ptr, aim)
 
 # Parameters for the sizes of the picture
 
-B_NUM_EXTRA = 90
-B_NUM_averaging =20
+B_NUM_EXTRA = 100
+B_NUM_averaging = 30
 
 # Compute the spatial subdivision.
 # And start the brwre_histogram.
@@ -158,8 +158,6 @@ for i in range(space_averaging):
 # \int \xi^n(x)f(x) = \sum_x n^{-2} \xi^n(x) f(x)
 
 noise_avrg = noise_avrg*(B_NUM_averaging/DIM_BOX)**2
-
-embed()
 
 # We define the animation function:
 def animate(i):
@@ -246,9 +244,11 @@ ax2.set_xlim(0, 1)
 ax2.set_ylim(0, 1)
 time_text = ax1.text(0.05, 0.95,'',horizontalalignment='left',verticalalignment='top', transform=ax1.transAxes, color = 'white')
 # Picture for the particle system
-im1       = ax1.imshow(brwre_histo*(B_NUM_EXTRA/DIM_BOX)**2, interpolation='none', origin='low', vmin = 0, vmax = 0.047*intensity*B_NUM_EXTRA,  \
+im1       = ax1.imshow(brwre_histo*(B_NUM_EXTRA/DIM_BOX)**2, interpolation='none', origin='low', vmin = 0, vmax = 0.034*intensity*B_NUM_EXTRA,  \
 	extent=[space_histo_x[0]/DIM_BOX, space_histo_x[-1]/DIM_BOX, space_histo_y[0]/DIM_BOX, space_histo_y[-1]/DIM_BOX], cmap = plt.get_cmap('jet'))
-# Picture for the averaged noise!
+
+
+# Picture for the averaged noise
 im2       = ax2.imshow(noise_avrg, interpolation='none', origin='low', vmin = -2*intensity*B_NUM_averaging, vmax = 2*intensity*B_NUM_averaging,  \
 	extent=[avrg_histo_x[0]/DIM_BOX, avrg_histo_x[-1]/DIM_BOX, avrg_histo_y[0]/DIM_BOX, avrg_histo_y[-1]/DIM_BOX], cmap = plt.get_cmap('plasma'))
 #ax1.add_im(im1)
@@ -259,7 +259,7 @@ im2       = ax2.imshow(noise_avrg, interpolation='none', origin='low', vmin = -2
 plt.title("2D BRWRE") 
 
 # We let the animation go.
-ani       = animation.FuncAnimation(fig, animate, frames=300, interval = 70, blit = True)
+ani       = animation.FuncAnimation(fig, animate, frames=400, interval = 70, blit = True)
 ani.save(filename = 'brwre_2D.mp4', extra_args=['-vcodec', 'libx264'], bitrate = 16000)
 
 #END
